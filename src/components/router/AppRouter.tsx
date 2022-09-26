@@ -16,7 +16,7 @@ import RequireAuth from '@app/components/router/RequireAuth';
 import { withLoading } from '@app/hocs/withLoading.hoc';
 import NftDashboardPage from '@app/pages/DashboardPages/NftDashboardPage';
 import MedicalDashboardPage from '@app/pages/DashboardPages/MedicalDashboardPage';
-import ListDeviceDashboardPage from '@app/attt/dashboard/ListDeviceDashboardPage';
+import ListDeviceDashboardPage from '@app/doanmta/dashboard/ListDeviceDashboardPage';
 
 const NewsFeedPage = React.lazy(() => import('@app/pages/NewsFeedPage'));
 const KanbanPage = React.lazy(() => import('@app/pages/KanbanPage'));
@@ -62,8 +62,8 @@ const ReactSimpleMaps = React.lazy(() => import('@app/pages/maps/ReactSimpleMaps
 const PigeonsMaps = React.lazy(() => import('@app/pages/maps/PigeonsMapsPage/PigeonsMapsPage'));
 const Logout = React.lazy(() => import('./Logout'));
 //** IMPORT ATTT PAGES PROJECT */
-const PersonalInformationPage = React.lazy(() => import('@app/attt/personal/PersonalInformationPage'));
-const ManageDevicePage = React.lazy(() => import('@app/attt/device/ManageDevicePage'));
+const PersonalInformationPage = React.lazy(() => import('@app/doanmta/personal/PersonalInformationPage'));
+const ManageDevicePage = React.lazy(() => import('@app/doanmta/device/ManageDevicePage'));
 /** END IMPORT CUSTOM */
 
 export const NFT_DASHBOARD_PATH = '/';

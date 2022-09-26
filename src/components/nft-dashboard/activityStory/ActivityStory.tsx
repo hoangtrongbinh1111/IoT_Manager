@@ -1,27 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Col } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useAppSelector } from '@app/hooks/reduxHooks';
 import { ActivityStoryItem } from './ActivityStoryItem/ActivityStoryItem';
 import { UserActivity, getUserActivities } from '@app/api/activity.api';
 import * as S from './ActivityStory.styles';
 
 export const ActivityStory: React.FC = () => {
-  const [story, setStory] = useState<UserActivity[]>([]);
-
+  const deviceDetection = useAppSelector((state) => state.deviceDetection.deviceDetection);
   const { t } = useTranslation();
-
-  useEffect(() => {
-    getUserActivities().then((res) => setStory(res));
-  }, []);
 
   const activityStory = useMemo(
     () =>
-      story.map((item, index) => (
+    deviceDetection.map((item, index) => (
         <Col key={index} span={24}>
           <ActivityStoryItem {...item} />
         </Col>
       )),
-    [story],
+    [deviceDetection],
   );
 
   return (

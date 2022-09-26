@@ -2,20 +2,19 @@ import React from 'react';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { activityStatuses } from '@app/constants/config/activityStatuses';
-import { UserActivity } from '@app/api/activity.api';
+import { DeviceModel } from '@app/domain/DeviceModel';
 import { Dates } from '@app/constants/Dates';
 import { formatNumberWithCommas, getCurrencyPrice } from '@app/utils/utils';
 import * as S from './ActivityStoryItem.styles';
+import StubAvatar from '@app/assets/images/stub-avatar.webp';
 
-export const ActivityStoryItem: React.FC<UserActivity> = ({ image, title, status, date, usd_value, category }) => {
+export const ActivityStoryItem: React.FC<DeviceModel> = ({ id, mac_address, is_authen, label }) => {
   const { t } = useTranslation();
-
-  const currentStatus = activityStatuses.find((configStatus) => configStatus.name === status);
 
   return (
     <Row gutter={[20, 20]} wrap={false} align="middle">
       <Col>
-        <img width={80} height={80} src={image} alt={title} />
+        <img width={80} height={80} src={StubAvatar} alt={"No image"} />
       </Col>
 
       <Col flex={1}>
@@ -23,11 +22,11 @@ export const ActivityStoryItem: React.FC<UserActivity> = ({ image, title, status
           <Col span={12}>
             <Row gutter={[16, 16]}>
               <Col span={24}>
-                <S.Title>{title}</S.Title>
+                <S.Title>{mac_address}</S.Title>
               </Col>
 
               <Col span={24}>
-                <S.Status $color={currentStatus?.color || 'primary'}>{t(currentStatus?.title || '')}</S.Status>
+                <S.Status $color={'primary'}>{`Reported: ${label}`}</S.Status>
               </Col>
             </Row>
           </Col>
@@ -35,10 +34,10 @@ export const ActivityStoryItem: React.FC<UserActivity> = ({ image, title, status
           <Col span={12}>
             <Row gutter={[16, 16]}>
               <Col span={24}>
-                <S.DateText>{Dates.getDate(date).format('lll')}</S.DateText>
+                <S.DateText>{Dates.getToday().format('lll')}</S.DateText>
               </Col>
               <Col span={24}>
-                <S.Text>{category}</S.Text>
+                <S.Text>{is_authen ? "Authorized" : "Unauthorized"}</S.Text>
               </Col>
             </Row>
           </Col>

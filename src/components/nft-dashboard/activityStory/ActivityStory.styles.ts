@@ -13,7 +13,7 @@ export const Title = styled(Typography.Title)`
 `;
 
 export const ActivityRow = styled(Row)`
-  overflow-y: auto;
+  overflow-y: unset;
 `;
 
 export const Wrapper = styled.div`
