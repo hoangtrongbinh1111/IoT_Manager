@@ -10,13 +10,13 @@ interface ProfileNavItem {
 }
 
 export const profileNavData: ProfileNavItem[] = [
-  {
-    id: 1,
-    name: 'profile.nav.personalInfo.title',
-    icon: <UserOutlined />,
-    color: 'primary',
-    href: 'personal-information',
-  },
+  // {
+  //   id: 1,
+  //   name: 'profile.nav.personalInfo.title',
+  //   icon: <UserOutlined />,
+  //   color: 'primary',
+  //   href: 'personal-information',
+  // },
   {
     id: 1,
     name: 'profile.nav.personalInfo.title',

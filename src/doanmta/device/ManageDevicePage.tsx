@@ -10,6 +10,7 @@ import { notificationController } from 'controllers/notificationController';
 import { Status } from '@app/components/profile/profileCard/profileFormNav/nav/payments/paymentHistory/Status/Status';
 import { useMounted } from '@app/hooks/useMounted';
 import * as S from './Tables.styles';
+import { DeviceTableData, DeviceData, getListDevice } from '@app/api/device.api';
 
 const initialPagination: Pagination = {
   current: 1,
@@ -17,7 +18,7 @@ const initialPagination: Pagination = {
 };
 
 const ManageDevicePage: React.FC = () => {
-  const [tableData, setTableData] = useState<{ data: DeviceTableRow[]; pagination: Pagination; loading: boolean }>({
+  const [tableData, setTableData] = useState<{ data: DeviceData[]; pagination: Pagination; loading: boolean }>({
     data: [],
     pagination: initialPagination,
     loading: false,
@@ -28,10 +29,17 @@ const ManageDevicePage: React.FC = () => {
   const fetch = useCallback(
     (pagination: Pagination) => {
       setTableData((tableData) => ({ ...tableData, loading: true }));
-      getDeviceTableData(pagination).then((res) => {
+      // getDeviceTableData(pagination).then((res) => {
+      //   if (isMounted.current) {
+      //     setTableData({ data: res.data, pagination: res.pagination, loading: false });
+      //   }
+      // });
+      getListDevice(pagination).then((res) => {
         if (isMounted.current) {
-          setTableData({ data: res.data, pagination: res.pagination, loading: false });
+          setTableData({ data: res.data, pagination:pagination, loading: false });
         }
+      }).catch(err => {
+        console.log(err);
       });
     },
     [isMounted],
@@ -45,10 +53,11 @@ const ManageDevicePage: React.FC = () => {
     fetch(pagination);
   };
 
-  const handleDeleteRow = (rowId: number) => {
+  const handleDeleteRow = (rowId: string) => {
+    alert(rowId)
     setTableData({
       ...tableData,
-      data: tableData.data.filter((item) => item.key !== rowId),
+      data: tableData.data.filter((item) => item.id !== rowId.toString()),
       pagination: {
         ...tableData.pagination,
         total: tableData.pagination.total ? tableData.pagination.total - 1 : tableData.pagination.total,
@@ -58,44 +67,33 @@ const ManageDevicePage: React.FC = () => {
 
   const columns: ColumnsType<DeviceTableRow> = [
     {
+      title: t('common._id'),
+      dataIndex: '_id',
+      render: (text: string) => <span>{text}</span>
+    },
+    {
       title: t('common.device_name'),
       dataIndex: 'device_name',
       render: (text: string) => <span>{text}</span>
     },
     {
-      title: t('common.mac'),
-      dataIndex: 'mac',
+      title: t('common.mac_address'),
+      dataIndex: 'mac_address',
       render: (text: string) => <span>{text}</span>
     },
     {
-        title: t('common.status'),
-        dataIndex: 'status',
-        render: (text: string) => <span>{text}</span>
-      },
-    {
-      title: t('common.tags'),
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (tags: Tag[]) => (
-        <Row gutter={[10, 10]}>
-          {tags.map((tag: Tag) => {
-            return (
-              <Col key={tag.value}>
-                <Status color={defineColorByPriority(tag.priority)} text={tag.value.toUpperCase()} />
-              </Col>
-            );
-          })}
-        </Row>
-      ),
+      title: t('common.status'),
+      dataIndex: 'status',
+      render: (status: number) => <span>{status === 1 ? "Active" : "Inactive"}</span>
     },
     {
       title: t('tables.actions'),
       dataIndex: 'actions',
       width: '15%',
-      render: (text: string, record: { device_name: string; key: number }) => {
+      render: (text: string, record: { device_name: string; _id: string }) => {
         return (
           <Space>
-            <Button type="default" danger onClick={() => handleDeleteRow(record.key)}>
+            <Button type="default" danger onClick={() => handleDeleteRow(record._id)}>
               {t('tables.delete')}
             </Button>
           </Space>

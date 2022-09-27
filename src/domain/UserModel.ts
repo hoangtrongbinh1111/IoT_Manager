@@ -12,9 +12,9 @@ export interface UserModel {
     number: string;
     verified: boolean;
   };
-  sex: 'male' | 'female';
+  sex: string;
   birthday: string;
-  lang: 'en' | 'de';
+  lang: string;
   country: string;
   city: string;
   address1: string;

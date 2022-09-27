@@ -14,9 +14,9 @@ export interface BasicTableRow {
 }
 
 export interface DeviceTableRow {
-  key: number;
+  _id: string;
   device_name: string;
-  mac: string;
+  mac_address: string;
   status: string;
   tags?: Tag[];
 }
@@ -251,9 +251,9 @@ export const getDeviceTableData = (pagination: Pagination): Promise<DeviceTableD
       res({
         data: [
           {
-            key: 1,
+            _id: "1",
             device_name: 'Amazon Echo Dot 4',
-            mac: '12:34:56:78:34:HD',
+            mac_address: '12:34:56:78:34:HD',
             status: 'Active',
             tags: [
               { value: 'White-list', priority: Priority.INFO }

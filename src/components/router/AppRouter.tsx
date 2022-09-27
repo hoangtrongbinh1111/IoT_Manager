@@ -163,7 +163,7 @@ export const AppRouter: React.FC = () => {
           <Route path="404" element={<Error404 />} />
           <Route path="profile" element={<ProfileLayout />}>
           //** CUSTOM ATTT PROJECT */
-            <Route path="personal-information" element={<PersonalInformation />} />
+            {/* <Route path="personal-information" element={<PersonalInformation />} /> */}
             <Route path="personal-info" element={<PersonalInfo />} />
             <Route path="security-settings" element={<SecuritySettings />} />
             <Route path="notifications" element={<Notifications />} />
