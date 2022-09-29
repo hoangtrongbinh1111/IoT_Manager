@@ -8,3 +8,9 @@ export const TablesWrapper = styled.div`
 export const Card = styled(CommonCard)`
   margin-bottom: 2rem;
 `;
+
+export const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+`;

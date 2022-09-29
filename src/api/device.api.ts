@@ -23,15 +23,43 @@ export interface DeviceTableData {
 }
 
 export const getListDevice = async (pagination: Pagination): Promise<DeviceTableData> => {
-  // const headers = {
-  //   Authorization: `Bearer ${readToken()}`
-  // }
-  // const { data } = await axios.get('http://0.0.0.0:5678/device', {headers});
   const { data } = await API.get('device');
 
   return {
     data: data.data,
     pagination: { ...pagination, total: 1 }
+  }
+}
+
+export const getListDeviceDashboard = async (): Promise<any> => {
+  const { data } = await API.get('device');
+
+  return {
+    data: data.data
+  }
+}
+
+export const getStatisticDevice = async (): Promise<any> => {
+  const { data } = await API.get('device/statistic');
+
+  return {
+    data: data.data
+  }
+}
+
+export const addNewDevice = async (devicePayload: DeviceData): Promise<any> => {
+  const { data } = await API.post('device', {...devicePayload});
+
+  return {
+    data: data.data
+  }
+}
+
+export const deleteDevice = async (id: string): Promise<any> => {
+  const { data } = await API.delete(`device/${id}`);
+
+  return {
+    data: data.data
   }
 }
   

@@ -9,24 +9,25 @@ import { NftCard } from '@app/components/nft-dashboard/recently-added/nft-card/N
 import { getRecentlyAddedNfts, NftItem } from '@app/api/nftDashboard.api';
 import { useResponsive } from '@app/hooks/useResponsive';
 import * as S from './RecentlyAddedNft.styles';
+import { getListDeviceDashboard, DeviceData } from '@app/api/device.api';
 
 export const RecentlyAddedNft: React.FC = () => {
-  const [nfts, setNfts] = useState<NftItem[]>([]);
+  const [nfts, setNfts] = useState<DeviceData[]>([]);
 
   const { t } = useTranslation();
   const { mobileOnly, isTablet } = useResponsive();
 
   useEffect(() => {
-    getRecentlyAddedNfts().then((result) => {
-      setNfts(result);
+    getListDeviceDashboard().then((res) => {
+      setNfts(res.data);
     });
   }, []);
 
   const cards = useMemo(() => {
     return {
-      mobile: nfts.slice(0, 3).map((nft) => <NftCard key={nft.title} nftItem={nft} />),
+      mobile: nfts.slice(0, 3).map((nft) => <NftCard key={nft.id} nftItem={nft} />),
       tablet: nfts.map((nft) => (
-        <div key={nft.title}>
+        <div key={nft.id}>
           <S.CardWrapper>
             <NftCard nftItem={nft} />
           </S.CardWrapper>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useResponsive } from '@app/hooks/useResponsive';
-import { NftItem } from '@app/api/nftDashboard.api';
+import { DeviceData } from '@app/api/device.api';
 import { formatNumberWithCommas, getCurrencyPrice } from '@app/utils/utils';
 import * as S from './NftCard.styles';
 
 interface NftCardProps {
-  nftItem: NftItem;
+  nftItem: DeviceData;
 }
 
 export const NftCard: React.FC<NftCardProps> = ({ nftItem }) => {
@@ -14,17 +14,17 @@ export const NftCard: React.FC<NftCardProps> = ({ nftItem }) => {
   const tabletLayout = (
     <>
       <S.InfoHeader>
-        <S.InfoText>@{nftItem.author}</S.InfoText>
+        <S.InfoText>@{nftItem.manufacture}</S.InfoText>
       </S.InfoHeader>
 
       <S.InfoFooter>
         <S.CurrentBidWrapper>
           <S.CurrentBid>Status</S.CurrentBid>
-          <S.BidCrypto>{nftItem.currentBidCrypto}</S.BidCrypto>
+          <S.BidCrypto>{`ON`}</S.BidCrypto>
         </S.CurrentBidWrapper>
 
         <S.CurrentBidWrapper>
-          <S.Bid>{nftItem.currentBid}</S.Bid>
+          <S.Bid>{nftItem.status === 1 ? 'Active' : 'Inactive'}</S.Bid>
         </S.CurrentBidWrapper>
       </S.InfoFooter>
     </>
@@ -33,23 +33,23 @@ export const NftCard: React.FC<NftCardProps> = ({ nftItem }) => {
   const mobileLayout = (
     <>
       <S.InfoRow>
-        <S.InfoText>@{nftItem.author}</S.InfoText>
-        <S.BidCrypto>{nftItem.currentBidCrypto}</S.BidCrypto>
+        <S.InfoText>@{nftItem.manufacture}</S.InfoText>
+        <S.BidCrypto>{`ON`}</S.BidCrypto>
       </S.InfoRow>
 
       <S.InfoRow>
         <S.CurrentBid>Status</S.CurrentBid>
-        <S.Bid>{nftItem.currentBid}</S.Bid>
+        <S.Bid>{nftItem.status}</S.Bid>
       </S.InfoRow>
     </>
   );
 
   return (
-    <S.Card padding={0} $img={nftItem.image}>
-      <S.NftImage src={nftItem.image} alt="nftImage" />
+    <S.Card padding={0} $img={nftItem.link_image}>
+      <S.NftImage src={nftItem.link_image} alt="nftImage" />
       <S.NftInfo>
         <S.InfoRow>
-          <S.Title>{nftItem.title}</S.Title>
+          <S.Title>{nftItem.device_name}</S.Title>
         </S.InfoRow>
         {isTablet ? tabletLayout : mobileLayout}
       </S.NftInfo>

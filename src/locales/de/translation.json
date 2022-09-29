@@ -116,6 +116,7 @@
         "device_name": "Device Name",
         "_id": "ID",
         "mac_address": "MAC Address",
+        "add_device": "Add device",
         "status": "Status",
         "address": "Adresse",
         "advancedForms": "Erweiterte Formulare",

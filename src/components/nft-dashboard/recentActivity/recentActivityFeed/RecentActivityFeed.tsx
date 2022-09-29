@@ -3,10 +3,11 @@ import { Feed } from '@app/components/common/Feed/Feed';
 import { NotFound } from '@app/components/common/NotFound/NotFound';
 import { RecentActivityItem } from '@app/components/nft-dashboard/recentActivity/recentActivityFeed/RecentActivityItem/RecentActivityItem';
 import { Activity } from '@app/api/activity.api';
+import { LogData } from '@app/api/log.api';
 import * as S from './RecentActivityFeed.styles';
 
 interface RecentActivityFeedProps {
-  activity: Activity[];
+  activity: LogData[];
   hasMore: boolean;
   next: () => void;
 }

@@ -45,7 +45,7 @@ Check out a [live demo](https://altence.com/lightence-admin-demo).
 #### To go with the latest version please copy and past in your terminal the following steps
 
 ```
-git clone https://github.com/altence/lightence-admin.git my-awesome-project && cd my-awesome-project
+git clone https://github.com/hoangtrongbinh1111/IoT_Manager.git my-awesome-project && cd my-awesome-project
 ```
 
 Development mode
@@ -68,7 +68,7 @@ And then use the [webpack-bundle-analyzer](https://www.npmjs.com/package/webpack
 #### How to build your project based on Lightence
 
 ```
-git clone -b starter https://github.com/altence/lightence-admin.git my-awesome-project && cd my-awesome-project
+git clone -b starter https://github.com/hoangtrongbinh1111/IoT_Manager.git my-awesome-project && cd my-awesome-project
 ```
 And you will see a demos-free template.
 

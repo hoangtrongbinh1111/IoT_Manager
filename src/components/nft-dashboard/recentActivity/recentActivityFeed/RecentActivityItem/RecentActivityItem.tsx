@@ -3,35 +3,33 @@ import { useTranslation } from 'react-i18next';
 import { activityStatuses } from '@app/constants/config/activityStatuses';
 import { Dates } from '@app/constants/Dates';
 import { Activity } from '@app/api/activity.api';
+import { LogData } from '@app/api/log.api';
 import * as S from './RecentActivityItem.styles';
+import StubAvatar from '@app/assets/images/stub-avatar.webp';
 
-export const RecentActivityItem: React.FC<Activity> = ({ image, title, date, status, owner }) => {
+export const RecentActivityItem: React.FC<LogData> = ({ id, label_detect, mac_address, time_detect, status }) => {
   const { t } = useTranslation();
-
-  const currentActivity = useMemo(() => activityStatuses.find((dbStatus) => dbStatus.name === status), [status]);
 
   return (
     <S.ActivityCard>
       <S.Wrapper>
         <S.ImgWrapper>
-          <img src={image} alt={title} width={84} height={84} />
+          <img src={StubAvatar} alt={label_detect} width={84} height={84} />
         </S.ImgWrapper>
 
         <S.InfoWrapper>
           <S.InfoHeaderWrapper>
             <S.TitleWrapper>
-              <S.Title level={5}>{title}</S.Title>
+              <S.Title level={5}>{label_detect}</S.Title>
 
-              <S.IconWrapper>{currentActivity?.icon}</S.IconWrapper>
+              <S.IconWrapper>{}</S.IconWrapper>
             </S.TitleWrapper>
 
-            <S.Text>
-              {t(currentActivity?.title || '')} {t('nft.by')} {owner}
-            </S.Text>
+            <S.Text>{mac_address}</S.Text>
           </S.InfoHeaderWrapper>
 
           <S.InfoBottomWrapper>
-            <S.DateText>{Dates.getDate(date).format('lll')}</S.DateText>
+            <S.DateText>{Dates.getDate(time_detect).format('lll')}</S.DateText>
           </S.InfoBottomWrapper>
         </S.InfoWrapper>
       </S.Wrapper>

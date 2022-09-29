@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { NFTCard } from '@app/components/nft-dashboard/common/NFTCard/NFTCard';
 import { useAppSelector } from '@app/hooks/reduxHooks';
 import { formatNumberWithCommas, getCurrencyPrice } from '@app/utils/utils';
-import { getInformation } from '@app/api/earnings.api';
+import { getStatisticDevice } from '@app/api/device.api';
 import * as S from './Balance.styles';
 
 export const Balance: React.FC = () => {
+  const navigate = useNavigate();
   const [balance, setBalance] = useState({
     total_device: 0,
     total_device_active: 0,
@@ -18,7 +20,15 @@ export const Balance: React.FC = () => {
   const { theme } = useAppSelector((state) => state.theme);
 
   useEffect(() => {
-    userId && getInformation(userId).then((res) => setBalance(res));
+    userId &&
+      getStatisticDevice().then((res) => {
+        const { devices_active, devices_inactive } = res.data;
+        setBalance({
+          total_device: devices_active + devices_inactive,
+          total_device_active: devices_active,
+          total_device_inactive: devices_inactive,
+        });
+      });
   }, [userId]);
 
   const { t } = useTranslation();
@@ -57,7 +67,11 @@ export const Balance: React.FC = () => {
               </Row>
             </Col>
             <Col span={24}>
-              <S.TopUpButton type={theme === 'dark' ? 'ghost' : 'primary'} block>
+              <S.TopUpButton
+                type={theme === 'dark' ? 'ghost' : 'primary'}
+                block
+                onClick={() => navigate('/list-devices')}
+              >
                 {t('nft.detail')}
               </S.TopUpButton>
             </Col>

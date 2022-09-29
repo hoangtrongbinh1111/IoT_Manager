@@ -30,7 +30,7 @@ const App: React.FC = () => {
 		socket.on('notify_detect_iot_device', (data) => {
       const dataFormat: DeviceModel = JSON.parse(data);
       notificationController.warning({
-        message: `Label: ${dataFormat.label}`,
+        message: `Label: ${dataFormat.label_detect}`,
         description: `MAC Address: ${dataFormat.mac_address}`,
       })
       dispatch(appendDeviceDetection(dataFormat))

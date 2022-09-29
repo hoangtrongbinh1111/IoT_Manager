@@ -5,6 +5,7 @@ import { RecentActivityFeed } from '@app/components/nft-dashboard/recentActivity
 import { RecentActivityFilter } from '@app/components/nft-dashboard/recentActivity/recentActivityFilters/RecentActivityFilter';
 import { useResponsive } from '@app/hooks/useResponsive';
 import { Activity, getActivities } from '@app/api/activity.api';
+import { getListLog, LogData } from '@app/api/log.api';
 import * as S from './RecentActivity.styles';
 
 export interface RecentActivityFilterState {
@@ -12,8 +13,8 @@ export interface RecentActivityFilterState {
 }
 
 export const RecentActivity: React.FC = () => {
-  const [activity, setActivity] = useState<Activity[]>([]);
-  const [filteredActivity, setFilteredActivity] = useState<Activity[]>([]);
+  const [activity, setActivity] = useState<LogData[]>([]);
+  const [filteredActivity, setFilteredActivity] = useState<LogData[]>([]);
   const [hasMore] = useState(true);
 
   const [filters, setFilters] = useState<RecentActivityFilterState>({
@@ -23,16 +24,17 @@ export const RecentActivity: React.FC = () => {
   const { isDesktop } = useResponsive();
 
   useEffect(() => {
-    getActivities().then((res) => setActivity(res));
+    getListLog().then((res) => setActivity(res.data));
   }, []);
 
   const next = () => {
-    getActivities().then((newActivity) => setActivity(activity.concat(newActivity)));
+    // getActivities().then((newActivity) => setActivity(activity.concat(newActivity)));
   };
 
   useEffect(() => {
     if (filters.status.length > 0) {
-      setFilteredActivity(activity.filter((item) => filters.status.some((filter) => filter === item.status)));
+      // setFilteredActivity(activity.filter((item) => filters.status.some((filter) => filter === item.status)));
+      setFilteredActivity(activity);
     } else {
       setFilteredActivity(activity);
     }
