@@ -5,6 +5,10 @@ export const TablesWrapper = styled.div`
   margin-top: 1.875rem;
 `;
 
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;
+
 export const Card = styled(CommonCard)`
   margin-bottom: 2rem;
 `;

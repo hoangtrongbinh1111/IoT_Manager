@@ -12,6 +12,7 @@ import { Status } from '@app/components/profile/profileCard/profileFormNav/nav/p
 import { useMounted } from '@app/hooks/useMounted';
 import * as S from './Tables.styles';
 import { DeviceTableData, DeviceData, getListDevice, addNewDevice, deleteDevice } from '@app/api/device.api';
+import styled from 'styled-components';
 
 const initialPagination: Pagination = {
   current: 1,
@@ -210,12 +211,14 @@ const ManageDevicePage: React.FC = () => {
             </Select>
           </Form.Item>
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-            <Button htmlType="button" onClick={onReset}>
-              Reset
-            </Button>
+            <S.ButtonWrapper>
+              <Button type="primary" htmlType="submit" style={{marginRight: "1rem"}}>
+                Submit
+              </Button>
+              <Button htmlType="button" onClick={onReset}>
+                Reset
+              </Button>
+            </S.ButtonWrapper>
           </Form.Item>
         </Form>
       </Modal>

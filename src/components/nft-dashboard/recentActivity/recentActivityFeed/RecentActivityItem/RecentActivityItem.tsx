@@ -25,7 +25,7 @@ export const RecentActivityItem: React.FC<LogData> = ({ id, label_detect, mac_ad
               <S.IconWrapper>{}</S.IconWrapper>
             </S.TitleWrapper>
 
-            <S.Text>{mac_address}</S.Text>
+            <S.Text>{"Reported by admin"}</S.Text>
           </S.InfoHeaderWrapper>
 
           <S.InfoBottomWrapper>

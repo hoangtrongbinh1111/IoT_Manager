@@ -22,11 +22,11 @@ export const ActivityStoryItem: React.FC<DeviceModel> = ({ id, mac_address, labe
           <Col span={12}>
             <Row gutter={[16, 16]}>
               <Col span={24}>
-                <S.Title>{mac_address}</S.Title>
+                <S.Title>{label_detect}</S.Title>
               </Col>
 
               <Col span={24}>
-                <S.Status $color={'primary'}>{`Reported: ${label_detect}`}</S.Status>
+                <S.Status $color={'primary'}>{`Reported by admin`}</S.Status>
               </Col>
             </Row>
           </Col>
