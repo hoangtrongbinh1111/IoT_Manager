@@ -31,7 +31,7 @@ const App: React.FC = () => {
       const dataFormat: DeviceModel = JSON.parse(data);
       notificationController.warning({
         message: `Label: ${dataFormat.label_detect}`,
-        description: `MAC Address: ${dataFormat.mac_address}`,
+        description: `Trace Id: ${dataFormat.id}`,
       })
       dispatch(appendDeviceDetection(dataFormat))
     })
